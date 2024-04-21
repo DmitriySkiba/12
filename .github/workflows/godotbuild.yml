@@ -20,6 +20,10 @@ jobs:
         version: 4.2.1-stable
         mono: true
 
+    - name: Get tree
+      run: | 
+        tree
+
     - name: Build with Godot
       run: |
         godot --export-release "windows" ./Fight-Jump.exe
