@@ -31,9 +31,9 @@ jobs:
       run: $GODOT_PATH --version
 
     - name: Build with Godot Mono Build Action
-      uses: lillian1024/godot-mono-action@v1.0
+      uses: QuakeEye/godot-mono-build-action@v0.0.2
       with:
-          name: MyGame
+          name: MyGamee
           preset: "windows"
           debugMode: true
    
