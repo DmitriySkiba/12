@@ -18,7 +18,10 @@ jobs:
       run: |
         wget https://downloads.tuxfamily.org/godotengine/4.2.1/mono/Godot_v4.2.1-stable_mono_linux_x86_64.zip
         echo "GODOT_PATH=$(pwd)/Godot_v4.2.1-stable_mono_linux_x86_64.zip" >> $GITHUB_ENV
-        chmod +x $GODOT_PATH
+
+    - name: Set executable permissions
+      run: sudo chmod +x ${{ env.GODOT_PATH }}
+
 
     - name: Build with Godot for Windows
       run: |
