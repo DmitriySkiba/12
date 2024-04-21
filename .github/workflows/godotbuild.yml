@@ -23,8 +23,12 @@ jobs:
         sudo mkdir -p /github/home/.local/share/godot/export_templates/
         sudo mkdir -p /root/.local/share/godot/templates/
         wget https://downloads.tuxfamily.org/godotengine/4.2.1/Godot_v4.2.1-stable_export_templates.tpz
-        sudo unzip Godot_v4.2.1-stable_export_templates.tpz -d /github/home/.local/share/godot/export_templates/
-        sudo unzip Godot_v4.2.1-stable_export_templates.tpz -d /root/.local/share/godot/templates/
+        sudo unzip Godot_v4.2.1-stable_export_templates.tpz -d /github/home/.local/share/godot/export_templates/.
+        
+        sudo unzip Godot_v4.2.1-stable_export_templates.tpz -d /root/.local/share/godot/templates/.
+        cd /root/.local/share/godot/templates/
+        ls -al
+        cd /
         tree
         
     - name: Install dotnet
