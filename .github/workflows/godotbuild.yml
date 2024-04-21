@@ -18,8 +18,9 @@ jobs:
       run: |
         wget https://downloads.tuxfamily.org/godotengine/4.2.1/mono/Godot_v4.2.1-stable_mono_linux_x86_64.zip
         unzip Godot_v4.2.1-stable_mono_linux_x86_64.zip
-        echo "GODOT_PATH=$(pwd)/Godot_v4.2.1-stable_mono_linux_x86_64/Godot_v4.2.1-stable_mono_linux_x86_64.zip" >> $GITHUB_ENV
-
+        echo "GODOT_PATH=$(pwd)/Godot_v4.2.1-stable_mono_linux_x86_64/Godot_v4.2.1-stable_mono_linux_x86_64" >> $GITHUB_ENV
+        tree
+        
     - name: Install dotnet
       run: sudo apt install -y mono-devel
   
