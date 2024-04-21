@@ -30,6 +30,14 @@ jobs:
     - name: Verify
       run: $GODOT_PATH --version
 
-    - name: Build with Godot for Windows
-      run: |
-        $GODOT_PATH --rendering-driver opengl3 --export-pack "windows" "Fight-Jump.exe"
+    - name: Build with Godot Mono Build Action
+      uses: QuakeEye/godot-mono-build-action@v0.0.2
+      with:
+          name: "Jump-Fight"
+          preset: "windows"
+          debugMode: true
+          subdirectory: build
+   
+    - name: Get tree
+      run : tree
+    
