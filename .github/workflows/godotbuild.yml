@@ -16,17 +16,19 @@ jobs:
 
     - name: Setup Godot for Windows
       run: |
-        wget https://downloads.tuxfamily.org/godotengine/4.2.1/mono/Godot_v4.2.1-stable_mono_linux_x86_64.zip
-        echo "GODOT_PATH=$(pwd)/Godot_v4.2.1-stable_mono_linux_x86_64.zip" >> $GITHUB_ENV
+        wget https://downloads.tuxfamily.org/godotengine/4.2.1/mono/Godot_v4.2.1-stable_mono_win64.zip
+        unzip Godot_v4.2.1-stable_mono_win64.zip
+        echo "GODOT_PATH=$(pwd)/Godot_v4.2.1-stable_mono_win64/Godot_v4.2.1-stable_mono_win64.exe" >> $GITHUB_ENV
 
+    - name: Install dotnet
+      run: sudo apt install -y mono-devel
+  
     - name: Set executable permissions
       run: sudo chmod +x ${{ env.GODOT_PATH }}
 
-    - name: rsdsf
-      run: |
-       godot --version
-
+    - name: Verify
+      run: $GODOT_PATH --version
 
     - name: Build with Godot for Windows
       run: |
-        $GODOT_PATH --export-release "windows" ./Fight-Jump.exe
+        $GODOT_PATH --export-release "windows" "Fight-Jump.exe"
