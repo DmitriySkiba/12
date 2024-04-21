@@ -21,4 +21,4 @@ jobs:
 
     - name: Build with Godot for Windows
       run: |
-        & $env:GODOT_PATH --export-pack "Windows Desktop" "Fight-Jump.exe"
+        & $env:GODOT_PATH --export-release "windows" "Fight-Jump.exe"
