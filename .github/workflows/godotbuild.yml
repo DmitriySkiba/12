@@ -30,7 +30,7 @@ jobs:
     - name: Verify
       run: | 
         $GODOT_PATH --version
-        godot --export "windows" ./project.godot
+        $GODOT_PATH --export "windows" ./project.godot
 
    
     - name: Get tree
