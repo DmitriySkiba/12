@@ -21,8 +21,10 @@ jobs:
         echo "GODOT_PATH=$(pwd)/Godot_v4.2.1-stable_mono_linux_x86_64/Godot_v4.2.1-stable_mono_linux.x86_64" >> $GITHUB_ENV
         # Скачиваем архив с шаблонами экспорта для Windows
         sudo mkdir -p /github/home/.local/share/godot/export_templates/
+        sudo mkdir -p /root/.local/share/godot/templates/
         wget https://downloads.tuxfamily.org/godotengine/4.2.1/Godot_v4.2.1-stable_export_templates.tpz
         sudo unzip Godot_v4.2.1-stable_export_templates.tpz -d /github/home/.local/share/godot/export_templates/
+        sudo unzip Godot_v4.2.1-stable_export_templates.tpz -d /root/.local/share/godot/templates/
         tree
         
     - name: Install dotnet
