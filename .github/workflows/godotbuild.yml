@@ -1,4 +1,4 @@
-name: Build Godot Project
+name: Build Godot Project for Windows
 
 on:
   push:
@@ -12,18 +12,14 @@ jobs:
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v4
+      uses: actions/checkout@v2
 
-    - name: Setup Godot
-      uses: lihop/godot-setup@v2.1.3
-      with:
-        version: 4.2.1-stable
-        mono: true
-
-    - name: Get tree
-      run: | 
-        tree
-
-    - name: Build with Godot
+    - name: Setup Godot for Windows
       run: |
-        /home/runner/work/12/12/v4.2.1-stable/Godot_v4.2.1-stable_mono_linux_x86_64/Godot_v4.2.1-stable_mono_linux_x86_64-wrapper --export-release "windows" ./Fight-Jump.exe
+        wget https://downloads.tuxfamily.org/godotengine/4.2.1/mono/Godot_v4.2.1-stable_mono_linux_x86_64.zip
+        echo "GODOT_PATH=$(pwd)/Godot_v4.2.1-stable_mono_linux_x86_64.zip" >> $GITHUB_ENV
+        chmod +x $GODOT_PATH
+
+    - name: Build with Godot for Windows
+      run: |
+        $GODOT_PATH --export-release "windows" ./Fight-Jump.exe
