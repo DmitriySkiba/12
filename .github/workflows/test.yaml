@@ -1,0 +1,58 @@
+name: Tests
+on: workflow_dispatch
+
+jobs:
+  tests:
+    name: 🧪 Evaluate Tests on ${{ matrix.os }}
+    if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name != github.event.pull_request.base.repo.full_name
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest]
+    env:
+      DOTNET_CLI_TELEMETRY_OPTOUT: true
+      DOTNET_NOLOGO: true
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with: 
+          ref: main
+
+      - name: Setup .NET Core SDK
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '8.0.*'
+
+      - name: Godot Setup
+        uses: lihop/godot-setup@v2.1.2
+        with:
+          version: 4.2.1-stable
+          bits: 64
+          mono: true
+          alias: godot
+          export-templates: true
+
+      - name: Restore Dependencies
+        run: dotnet restore
+
+      - name: Setup Godot
+        uses: chickensoft-games/setup-godot@v2
+        with:
+          version: 4.2.1
+          is-mono: true
+
+      - name: Verify Setup
+        run: |
+          dotnet --version
+          godot --version
+          mono --version
+          tree
+
+      - name: Run Godot Tests
+        run: |
+          cp -r ./Main ./main
+          godot -d --headless --run-tests --quit-on-finish
