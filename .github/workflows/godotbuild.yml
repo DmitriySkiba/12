@@ -28,14 +28,10 @@ jobs:
       run: sudo chmod +x ${{ env.GODOT_PATH }}
 
     - name: Verify
-      run: $GODOT_PATH --version
+      run: | 
+        $GODOT_PATH --version
+        godot --export "windows" ./project.godot
 
-    - name: Build with Godot Mono Build Action
-      uses: QuakeEye/godot-mono-build-action@v0.0.2
-      with:
-          name: MyGame
-          preset: "windows"
-          debugMode: true
    
     - name: Get tree
       run : tree
