@@ -22,7 +22,7 @@ jobs:
         # Скачиваем архив с шаблонами экспорта для Windows
         sudo mkdir -p /github/home/.local/share/godot/export_templates/
         wget https://downloads.tuxfamily.org/godotengine/4.2.1/Godot_v4.2.1-stable_export_templates.tpz
-        unzip Godot_v4.2.1-stable_export_templates.tpz -d /github/home/.local/share/godot/export_templates/
+        sudo unzip Godot_v4.2.1-stable_export_templates.tpz -d /github/home/.local/share/godot/export_templates/
         tree
         
     - name: Install dotnet
