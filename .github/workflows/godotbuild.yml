@@ -26,4 +26,4 @@ jobs:
 
     - name: Build with Godot
       run: |
-        godot --export-release "windows" ./Fight-Jump.exe
+        /home/runner/work/12/12/v4.2.1-stable/Godot_v4.2.1-stable_mono_linux_x86_64/Godot_v4.2.1-stable_mono_linux_x86_64-wrapper --export-release "windows" ./Fight-Jump.exe
