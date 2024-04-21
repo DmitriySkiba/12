@@ -18,7 +18,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
         with:
-          ref: dev
+          ref: main
 
       - name: Setup .NET Core SDK
         uses: actions/setup-dotnet@v1
@@ -37,10 +37,13 @@ jobs:
       - name: Tree
         run: |
           tree
-
-      - name: Export project
-        run: |
-          godot --no-window --export "Linux/X11"
+      - name: Build with Godot Mono Build Action
+        uses: QuakeEye/godot-mono-build-action@v0.0.2
+        with:
+          name: "Jump-Fight"
+          preset: "windows"
+          debugMode: true
+          subdirectory: build
           
       - name: Refactor
         run: |
@@ -48,7 +51,6 @@ jobs:
           pwd
           sudo cp ./build/build/Jump-Fight ./build/build/Jump-Fight.exe
           sudo rm ./build/build/Jump-Fight
-
       - name: Place to zip
         run: |
           sudo zip -r Jump-Fight.zip ./build/build/*
@@ -64,7 +66,6 @@ jobs:
            NEW_TAG="${VERSION_PREFIX}${VERSION_MAJOR_MINOR}.${VERSION_PATCH}"
            echo "Generated new tag: $NEW_TAG"
            echo "NEW_TAG=$NEW_TAG" >> $GITHUB_ENV
-
       - name: Install gh-release action
         uses: softprops/action-gh-release@v1
         with:
