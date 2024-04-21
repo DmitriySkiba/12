@@ -26,7 +26,7 @@ jobs:
         sudo unzip Godot_v4.2.1-stable_export_templates.tpz -d /github/home/.local/share/godot/export_templates/.
         
         sudo unzip Godot_v4.2.1-stable_export_templates.tpz -d /root/.local/share/godot/templates/.
-        sudo cd /root/.local/share/godot/templates/
+        cd /root/.local/share/godot/templates/
         sudo ls -al
         cd /
         tree
