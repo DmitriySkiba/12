@@ -32,4 +32,4 @@ jobs:
 
     - name: Build with Godot for Windows
       run: |
-        $GODOT_PATH --export-pack "windows" "Fight-Jump.exe"
+        $GODOT_PATH --rendering-driver opengl3 --export-pack "windows" "Fight-Jump.exe"
