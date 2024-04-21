@@ -15,9 +15,9 @@ jobs:
       uses: actions/checkout@v4
 
     - name: Setup Godot
-      uses: josephbmanley/setup-godot@v1.4.0
+      uses: Vitorgus/Setup-Godot@v1.1.1
       with:
-        version: 4.2.1
+        godot-version: 4.2.1
         download-mono: true
 
     - name: Build with Godot
