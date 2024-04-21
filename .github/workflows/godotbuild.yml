@@ -31,12 +31,11 @@ jobs:
       run: $GODOT_PATH --version
 
     - name: Build with Godot Mono Build Action
-      uses: QuakeEye/godot-mono-build-action@v0.0.2
+      uses: lillian1024/godot-mono-action@v1.0
       with:
-          name: "Jump-Fight"
+          name: MyGame
           preset: "windows"
           debugMode: true
-          subdirectory: build
    
     - name: Get tree
       run : tree
