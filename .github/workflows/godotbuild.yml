@@ -12,9 +12,9 @@ jobs:
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
       with:
-        ref: dev
+        ref: main
 
     - name: Setup Godot
       uses: lihop/setup-godot@v2
