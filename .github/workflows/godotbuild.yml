@@ -13,39 +13,29 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
+      with:
+        ref: dev
 
-    - name: Setup Godot for Windows
-      run: |
-        sudo wget https://downloads.tuxfamily.org/godotengine/4.2.1/mono/Godot_v4.2.1-stable_mono_linux_x86_64.zip
-        sudo unzip Godot_v4.2.1-stable_mono_linux_x86_64.zip
-        echo "GODOT_PATH=$(pwd)/Godot_v4.2.1-stable_mono_linux_x86_64/Godot_v4.2.1-stable_mono_linux.x86_64" >> $GITHUB_ENV
-        # Скачиваем архив с шаблонами экспорта для Windows
-        sudo mkdir -p /github/home/.local/share/godot/export_templates/
-        sudo mkdir -p /root/.local/share/godot/templates/
-        sudo wget https://downloads.tuxfamily.org/godotengine/4.2.1/Godot_v4.2.1-stable_export_templates.tpz
-        sudo unzip Godot_v4.2.1-stable_export_templates.tpz -d /github/home/.local/share/godot/export_templates/.
-        
-        sudo unzip Godot_v4.2.1-stable_export_templates.tpz -d /root/.local/share/godot/templates/.
-        cd /root/.local/share/godot/templates/
-        sudo ls -al
-        cd /
-        tree
-        
+    - name: Setup Godot
+      uses: lihop/setup-godot@v2
+      with:
+        version: 4.2.1-stable
+        bits: 64
+        mono: true
+        alias: godot
+        export-templates: true
+      
     - name: Install dotnet
       run: sudo apt install -y mono-devel
   
-    - name: Set executable permissions
-      run: sudo chmod +x ${{ env.GODOT_PATH }}
-
-    - name: Build with Godot Mono Build Action
-      uses: QuakeEye/godot-mono-build-action@v0.0.2
-      with:
-        name: Jump-Fight
-        preset: windows
-        debugMode: true
-        subdirectory: build
-
-   
-    - name: Get tree
-      run : tree
-    
+    - name: Verify
+      run: |
+        v4.2.1-stable/Godot_v4.2.1-stable_mono_linux_x86_64/Godot_v4.2.1-stable_mono_linux.x86_64 --version
+    - name: Build project
+      run: |
+        v4.2.1-stable/Godot_v4.2.1-stable_mono_linux_x86_64/Godot_v4.2.1-stable_mono_linux.x86_64 --headless --quit --build-solutions
+    - name: Export project
+      run: |
+        mkdir build
+        v4.2.1-stable/Godot_v4.2.1-stable_mono_linux_x86_64/Godot_v4.2.1-stable_mono_linux.x86_64 --headless --export-release "windows" "build/project.exe"
+        tree
