@@ -36,4 +36,10 @@ jobs:
         tree
     - name: Export project
       run: |
-        zip v4.2.1-stable
+        sudo zip -r Soft.zip ./v4.2.1-stable/*
+        
+    - name: Install gh-release action
+      uses: softprops/action-gh-release@v1
+      with:
+          files: ./Soft.zip
+          tag_name: v2.0.0
