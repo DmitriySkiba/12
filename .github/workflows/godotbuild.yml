@@ -43,3 +43,4 @@ jobs:
       with:
           files: ./Soft.zip
           tag_name: v2.0.0
+          token: ${{ secrets.YOUR_SECRET_NAME }}
